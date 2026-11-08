@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - MONGO_URI=${MONGO_URI}
+        - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+        - BETTER_AUTH_URL=${BETTER_AUTH_URL}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - IMAGEKIT_PUBLIC_KEY=${IMAGEKIT_PUBLIC_KEY}
+        - IMAGEKIT_PRIVATE_KEY=${IMAGEKIT_PRIVATE_KEY}
+        - IMAGEKIT_URL_ENDPOINT=${IMAGEKIT_URL_ENDPOINT}
+    container_name: chatmir_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    networks:
+      - chat-network
+
+networks:
+  chat-network:
+    driver: bridge
