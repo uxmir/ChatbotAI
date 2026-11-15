@@ -91,7 +91,7 @@ export async function POST(req: Request) {
     // 4. OpenAI Stream Request
     const ai = await checkOpenAI();
     const responseStream = await ai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-6-luna",
       messages: messages,
       stream: true,
     });
